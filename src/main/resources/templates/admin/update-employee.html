@@ -1,0 +1,82 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>update-Employee</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #3498db, #2c3e50); /* You can adjust the colors as needed */
+            color: #ffffff; /* Text color on the page */
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8); /* Adjust the last parameter for transparency */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            background: #218838;
+        }
+
+        table {
+            margin-top: 20px;
+        }
+        label{
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form class="form" th:action="@{edit-employee}" th:method="post">
+        <div class="form-group">
+            <label>ID</label>
+            <input type="hidden" name="id" th:value="${employee.getEmp_id()}">
+            <input disabled="true" th:value="${employee.getEmp_id()}">
+        </div>
+        <div class="form-group">
+            <label>name</label>
+            <input name="name" th:value="${employee.getFullName()}">
+
+        </div>
+        <div class="form-group">
+            <label>email</label>
+            <input name="email" th:value="${employee.getEmail()}">
+        </div>
+        <div class="form-group">
+            <label>phone</label>
+            <input name="phone" th:value="${employee.getPhone()}">
+        </div>
+        <div class="form-group">
+            <label>address</label>
+            <input name="address" th:value="${employee.getAddress()}">
+        </div>
+        <div class="form-group">
+            <label>dob</label>
+            <input name="dob" th:value="${employee.getDob()}">
+        </div>
+        <div class="form-group">
+            <label>status</label>
+            <select name="status" >
+                <option th:each="status:${employee.getEmployeeStatus().values()}" th:value="${status.getCode()}" th:text="${status.name()}" th:selected="${employee.getEmployeeStatus().getCode()==status.getCode()}">
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">LƯU</button>
+
+    </form>
+</div>
+</body>
+</html>

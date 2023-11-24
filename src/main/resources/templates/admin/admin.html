@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin</title>
+    <style>
+
+        .container {
+            width: 50%;
+            height: 50%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            padding: 10px 15px;
+            display: block;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        a:hover {
+            background: #fff;
+            color: #333;
+            border-radius: 5px;
+        }
+
+        body {
+            background: linear-gradient(90deg, #e74c3c, #2c3e50);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <a th:href="@{admin/product}">Quản lý Sản phẩm</a><br>
+    <a th:href="@{admin/customer}">Quản lý Khách hàng</a><br>
+    <a th:href="@{admin/employee}">Quản lý Nhân viên</a><br>
+    <a th:href="@{admin/orders}">Quản lý Hóa đơn</a><br>
+</div>
+
+
+</body>
+</html>
