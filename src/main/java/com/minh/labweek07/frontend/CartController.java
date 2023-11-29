@@ -8,7 +8,6 @@ import com.minh.labweek07.backend.repository.OrderRepository;
 import com.minh.labweek07.backend.repository.ProductDetailRepository;
 import com.minh.labweek07.backend.repository.ProductRepository;
 import jakarta.servlet.http.HttpSession;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -127,9 +126,9 @@ public class CartController {
                 orderDetails.add(orderDetail);
             });
         }
-        Account account=(Account) session.getAttribute("acc");
-        System.out.println("account:"+account.getAccountID());
-        Customer customer=customerRepository.findCustomerByAccountAccountID(account.getAccountID()).get(0);
+        User account=(User) session.getAttribute("acc");
+
+        Customer customer=customerRepository.findCustomerByAccountAccountID(account.getUserID()).get(0);
         System.out.println("customer:"+customer.getCustId());
         order.setCustomer(customer);
         order.setOrderDetails(orderDetails);

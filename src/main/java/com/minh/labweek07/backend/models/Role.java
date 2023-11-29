@@ -8,16 +8,26 @@ import java.io.Serializable;
 @Table(name = "role")
 public class Role implements Serializable {
     @Id
-    @Column(name = "role_id",columnDefinition = "varchar(50)")
-    private String roleID;
+    @Column(name = "role_id")
+    private Integer roleID;
     @Column(name = "role_name")
     private String roleName;
     @Column(name = "description")
     private String description;
     @Column(name = "status")
     private String status;
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private User user;
 
-    public Role(String roleID, String roleName, String description, String status) {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Role(Integer roleID, String roleName, String description, String status) {
         this.roleID = roleID;
         this.roleName = roleName;
         this.description = description;
@@ -27,11 +37,19 @@ public class Role implements Serializable {
     public Role() {
     }
 
-    public String getRoleID() {
+    @Override
+    public String toString() {
+        return "Role{" +
+                "roleID='" + roleID + '\'' +
+                ", roleName='" + roleName + '\'' +
+                '}';
+    }
+
+    public Integer getRoleID() {
         return roleID;
     }
 
-    public void setRoleID(String roleID) {
+    public void setRoleID(Integer roleID) {
         this.roleID = roleID;
     }
 
@@ -58,4 +76,5 @@ public class Role implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }

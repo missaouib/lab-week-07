@@ -1,6 +1,5 @@
 package com.minh.labweek07.backend.repository;
 
-import com.minh.labweek07.backend.models.Account;
 import com.minh.labweek07.backend.models.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,8 +13,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query("SELECT c FROM Customer c WHERE c.phone LIKE %?1%")
     List<Customer> findCustomersByPhoneIsContainingIgnoreCase(String phone);
     Customer findCustomerByEmail(String email);
-    @Query(nativeQuery = true, value = "SELECT * FROM customers WHERE accountid = ?1")
-    List<Customer> findCustomerByAccountAccountID(String accountID);
+    @Query(nativeQuery = true, value = "SELECT * FROM customers WHERE user_id = ?1")
+    List<Customer> findCustomerByAccountAccountID(Integer accountID);
 
 
 }

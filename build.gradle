@@ -37,10 +37,16 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     implementation group: 'net.datafaker', name: 'datafaker', version: '2.0.2'
     implementation 'commons-fileupload:commons-fileupload:1.5'
-// https://mvnrepository.com/artifact/commons-io/commons-io
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'com.cloudinary:cloudinary-http44:1.35.0'
     implementation 'com.cloudinary:cloudinary-taglib:1.35.0'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.security:spring-security-web:6.2.0'
+    implementation 'org.springframework.security:spring-security-config:6.2.0'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
+
 }
 
 tasks.named('test') {

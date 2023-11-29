@@ -17,8 +17,8 @@ public class Customer {
     @Column
     private String address;
     @OneToOne
-    @JoinColumn(name = "accountID")
-    private Account account;
+    @JoinColumn(name = "user_id")
+    private User user;
     public Customer(long custId, String custName, String email, String phone, String address) {
         this.custId = custId;
         this.custName = custName;

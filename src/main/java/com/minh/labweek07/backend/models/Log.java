@@ -14,14 +14,14 @@ public class Log implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
-    private Account accountID;
+    private User accountID;
     @Column(name = "login_time")
 
     private String loginTime;
     @Column(name = "notes")
     private String notes;
 
-    public Log(long id, Account accountID, String loginTime, String notes) {
+    public Log(long id, User accountID, String loginTime, String notes) {
         this.id = id;
         this.accountID = accountID;
         this.loginTime = loginTime;
@@ -40,11 +40,11 @@ public class Log implements Serializable {
         this.id = id;
     }
 
-    public Account getAccountID() {
+    public User getAccountID() {
         return accountID;
     }
 
-    public void setAccountID(Account accountID) {
+    public void setAccountID(User accountID) {
         this.accountID = accountID;
     }
 
