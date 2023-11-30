@@ -1,6 +1,8 @@
 # lab-week-07
+ <h1>Các công nghệ sử dụng: Spring Data JPA,Spring MVC,Spring Boot 3,Spring Serurity 6,Thymleaf,MariaDB,Cloudiary</h1>
  <h1>Class Diagram</h1>
-<img width="316" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/31e7ee17-c545-45f1-bb95-828b992e7ed8">
+<img width="369" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/610c5359-7f9d-4eff-a206-77c150555e0d">
+
 
 <h1>Tổ chức thư mụcr</h1>
 <img width="203" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/9ab4bd55-a32a-4c23-8ab5-0199326ade0d">
@@ -10,8 +12,9 @@
 
 <p>
  Chức năng: đăng nhập
-- Nếu tài khoản có role:admin sẽ chuyển sang trang admin
-- Nếu tài khoản có role:user sẽ chuyển sang trang chủ mua hàng
+- Nếu đăng nhập vào các đường link /admin/** phải có role Admin </br>
+- Nếu người dùng thực hiện checkout thì phải đăng nhập  </br>
+- những đường dẫn còn lại có thễ vào tự do  </br>
 </p>
 <h1>Trang chủ mua hàng</h1>
 <img width="941" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/1e3990d7-11a9-4ab2-bec7-733b8b9f6672">
