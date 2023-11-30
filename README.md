@@ -16,6 +16,9 @@
 - Nếu người dùng thực hiện checkout thì phải đăng nhập  </br>
 - những đường dẫn còn lại có thễ vào tự do  </br>
 </p>
+<h1>Trang đăng ký</h1>
+<img width="811" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/b6c352a7-12ee-47e5-aac9-45851df53004">
+
 <h1>Trang chủ mua hàng</h1>
 <img width="941" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/1e3990d7-11a9-4ab2-bec7-733b8b9f6672">
 
@@ -29,6 +32,7 @@
 -hiển thị sản phẩm,
 -phân trang
 -lọc theo màu,loại
+-Tìm kiếm
 </p>
 <h1>Trang chi tiết sản phẩm</h1>
 <img width="950" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/5044be70-3b2f-4b10-bcc2-6a303a55e387">
@@ -46,8 +50,10 @@
 <p>Chức năng <br/>
  -hiển thị sản phẩm đã thêm vào giỏ - nếu sản phẩm đã có sẽ tự động tăng  <br/>
  -thay đổi số lượng  <br/>
- -khi nhấn mua hàng sẽ tạo hóa đơn  <br/>
+ -khi nhấn mua hàng sẽ tạo hóa đơn đồng thời gửi email cho khách hàng <br/>
 </p>
+<img width="701" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/778aea71-6bf0-4d37-ae88-1f4d785ea41b">
+
 <h1>Trang quản lý - admin</h1>
 <img width="802" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/9857157a-c304-4403-9b5e-a6bc17e249c4">
 
