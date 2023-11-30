@@ -30,7 +30,7 @@
     <div class="row">
       <div class="col-12">
         <div class="search-content">
-          <form action="#" method="get">
+          <form th:action="@{/shop/search}" th:method="get">
             <input type="search" name="search" id="search" placeholder="Type your keyword...">
             <button type="submit"><img src="img/core-img/search.png" alt=""></button>
           </form>
@@ -69,20 +69,15 @@
     <!-- Amado Nav -->
     <nav class="amado-nav">
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a th:href="@{/shop}">Shop</a></li>
+        <li><a th:href="@{/home}">Home</a></li>
+        <li class="active"><a th:href="@{/shop}">Shop</a></li>
         <li><a th:href="@{/cart}">Cart</a></li>
         <li><a href="checkout.html">Checkout</a></li>
       </ul>
     </nav>
-    <!-- Button Group -->
-    <div class="amado-btn-group mt-30 mb-100">
-      <a href="#" class="btn amado-btn mb-15">%Discount%</a>
-      <a href="#" class="btn amado-btn active">New this week</a>
-    </div>
     <!-- Cart Menu -->
     <div class="cart-fav-search mb-100">
-      <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+      <a th:href="@{/cart}" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span th:text="${sizeCart}">(0)</span></a>
       <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
       <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
     </div>
@@ -106,9 +101,9 @@
       <!--  Catagories  -->
       <div class="catagories-menu">
         <ul>
-          <li class="active"><a href="#">tất cả</a></li>
-          <li th:each="category : ${productCategories}">
-            <a th:href="@{/shop/category/{category}(category=${category.getId()})}" th:text="${category.categoryName}"></a>
+          <li th:class="${categorySelected == null ? 'active': ''}"><a th:href="@{/shop}">tất cả</a></li>
+          <li  th:each="category : ${productCategories}" th:class="${categorySelected == category.id} ? 'active' : ''">
+            <a  th:href="@{/shop/category/{category}(category=${category.getId()})}" th:text="${category.categoryName}"></a>
           </li>
         </ul>
       </div>
@@ -213,8 +208,7 @@
               <!-- Product Meta Data -->
               <div class="product-meta-data">
                 <div class="line"></div>
-               <p class="product-price" th:text="${#numbers.formatDecimal(product.getPrices().get(0).getPrice(), 0, 'COMMA', 2, 'POINT') + ' VND'}"></p>
-
+               <p class="product-price" th:text="${#numbers.formatDecimal(product.getPrices().get(0).getPrice(), 0, 'COMMA', 3, 'POINT') + ' VND'}"></p>
                 <a href="product-details.html">
                   <h6 th:text="${product.getName()}"></h6>
                 </a>

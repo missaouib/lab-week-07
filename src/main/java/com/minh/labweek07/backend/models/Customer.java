@@ -27,6 +27,14 @@ public class Customer {
         this.address = address;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Customer() {
     this.custId=0L;
     }

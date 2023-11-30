@@ -7,6 +7,7 @@ import com.minh.labweek07.backend.repository.CustomerRepository;
 import com.minh.labweek07.backend.repository.OrderRepository;
 import com.minh.labweek07.backend.repository.ProductDetailRepository;
 import com.minh.labweek07.backend.repository.ProductRepository;
+import com.minh.labweek07.backend.service.EmailService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,39 +30,42 @@ public class CartController {
     @Autowired private ProductRepository productRepository;
     @Autowired private ProductDetailRepository productDetailRepository;
     @Autowired private CustomerRepository customerRepository;
-    @PostMapping("/add-to-cart")
-    public String addToCart(HttpSession session, Model model, @RequestParam("id") long id, @RequestParam("color") int color, @RequestParam("size") int size, @RequestParam("quantity") int quantity, @RequestParam("price") double price,@RequestParam("name") String name,@RequestParam("image") String image){
+    @Autowired private EmailService emailService;
 
-        List<Cart> carts=(List<Cart>) session.getAttribute("cart");
-        if(carts==null){
-            carts=new ArrayList<>();
-            Color colorE=Color.getColorFromInt(color);
-            Size sizeE=Size.getSizeFromInt(size);
-            Cart cartItem= new Cart(id,name,image,price,colorE,sizeE,quantity)  ;
+
+    @PostMapping("/add-to-cart")
+    public String addToCart(HttpSession session, Model model, @RequestParam("id") long id,
+                            @RequestParam("color") int color, @RequestParam("size") int size,
+                            @RequestParam("quantity") int quantity, @RequestParam("price") double price,
+                            @RequestParam("name") String name, @RequestParam("image") String image) {
+        List<Cart> carts = (List<Cart>) session.getAttribute("cart");
+
+        if (carts == null) {
+            carts = new ArrayList<>();
+            session.setAttribute("cart", carts);
+        }
+
+        boolean isExist = false;
+
+        for (Cart cart : carts) {
+            if (cart.getId() == id && cart.getColor().ordinal() == color && cart.getSize().ordinal() == size) {
+                cart.setQuantity(cart.getQuantity() + quantity);
+                isExist = true;
+                break;
+            }
+        }
+
+        if (!isExist) {
+            Color colorE = Color.getColorFromInt(color);
+            Size sizeE = Size.getSizeFromInt(size);
+            Cart cartItem = new Cart(id, name, image, price, colorE, sizeE, quantity);
+            System.out.println("cartItem:" + cartItem.getId());
             carts.add(cartItem);
         }
-        else{
-           boolean isExist=false;
-              for(Cart cart:carts){
-                if(cart.getId()==id&&cart.getColor().ordinal()==color&&cart.getSize().ordinal()==size){
-                     cart.setQuantity(cart.getQuantity()+quantity);
-                     isExist=true;
-                     break;
-                }
-              }
-              if(!isExist){
-                  Color colorE=Color.getColorFromInt(color);
-                  Size sizeE=Size.getSizeFromInt(size);
-                  Cart cartItem= new Cart(id,name,image,price,colorE,sizeE,quantity)  ;
-                  carts.add(cartItem);
-              }
-
-
-        }
-        model.addAttribute("cart",carts);
-        session.setAttribute("cart",carts);
-        return "user/cart";
+        model.addAttribute("cart", carts);
+        return "redirect:/cart";
     }
+
     @GetMapping("/cart")
     public String cart(HttpSession session,Model model){
         List<Cart> carts=(List<Cart>) session.getAttribute("cart");
@@ -136,6 +140,8 @@ public class CartController {
         if( orderRepository.save(order)!=null){
             session.removeAttribute("cart");
             model.addAttribute("message","Đặt hàng thành công");
+            Email email=new Email(customer.getEmail(),"Đặt hàng thành công","Cảm ơn bạn đã đặt hàng tại shop chúng tôi, chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất, xin cảm ơn, chúc bạn một ngày tốt lành, shop chúng tôi sẽ gửi bạn một email để xác nhận đơn hàng của bạn trong thời gian sớm nhất");
+            emailService.sendMail(email);
             return "user/cart";
         }else {
             model.addAttribute("message","Đặt hàng thất bại");
@@ -144,5 +150,48 @@ public class CartController {
 
 
     }
+    @GetMapping("/reduce-quantity")
+    public String reduceQuantity(HttpSession session,Model model,@RequestParam("id") long id,@RequestParam("color") int color,@RequestParam("size") int size){
+        List<Cart> carts=(List<Cart>) session.getAttribute("cart");
+        if(carts!=null){
+            for(Cart cart:carts){
+                if(cart.getId()==id&&cart.getColor().ordinal()==color&&cart.getSize().ordinal()==size){
+                    cart.setQuantity(cart.getQuantity()-1);
+                    if(cart.getQuantity()==0){
+                        carts.remove(cart);
+                    }
+                    break;
+                }
+            }
+            model.addAttribute("cart",carts);
+            double total=0;
+            for(Cart cart:carts){
+                total+=cart.getPrice()*cart.getQuantity();
+            }
+            model.addAttribute("total",total);
+        }
+
+        return "user/cart";
+    }
+    @GetMapping("/increase-quantity")
+public String increaseQuantity(HttpSession session,Model model,@RequestParam("id") long id,@RequestParam("color") int color,@RequestParam("size") int size){
+        List<Cart> carts=(List<Cart>) session.getAttribute("cart");
+        if(carts!=null){
+            for(Cart cart:carts){
+                if(cart.getId()==id&&cart.getColor().ordinal()==color&&cart.getSize().ordinal()==size){
+                    cart.setQuantity(cart.getQuantity()+1);
+                    break;
+                }
+            }
+            model.addAttribute("cart",carts);
+            double total=0;
+            for(Cart cart:carts){
+                total+=cart.getPrice()*cart.getQuantity();
+            }
+            model.addAttribute("total",total);
+        }
+        return "user/cart";
+    }
+
 
 }

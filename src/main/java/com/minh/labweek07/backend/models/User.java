@@ -23,6 +23,7 @@ import java.util.List;
 @Setter
 public class User implements Serializable, UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     Integer userID;
     @Column(name = "username")

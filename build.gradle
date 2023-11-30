@@ -24,6 +24,10 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'de.vinado.boot:mail-extensions-concurrent-javamail-spring-boot-starter:2.0.0'
+    implementation 'de.vinado.boot:mail-extensions-concurrent-javamail-spring-boot-starter:2.0.0'
+    implementation 'de.vinado.boot:mail-extensions-concurrent-javamail-spring-boot-starter:2.0.0'
+    implementation 'de.vinado.boot:mail-extensions-concurrent-javamail-spring-boot-starter:2.0.0'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -46,6 +50,8 @@ dependencies {
     implementation 'org.springframework.security:spring-security-web:6.2.0'
     implementation 'org.springframework.security:spring-security-config:6.2.0'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 }
 

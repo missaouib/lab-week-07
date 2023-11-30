@@ -8,6 +8,7 @@ import java.io.Serializable;
 @Table(name = "role")
 public class Role implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
     private Integer roleID;
     @Column(name = "role_name")
@@ -18,6 +19,13 @@ public class Role implements Serializable {
     private String status;
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private User user;
+
+    public Role(String roleName, String description, String status, User user) {
+        this.roleName = roleName;
+        this.description = description;
+        this.status = status;
+        this.user = user;
+    }
 
     public User getUser() {
         return user;

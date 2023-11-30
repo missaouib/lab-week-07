@@ -8,6 +8,7 @@ import com.minh.labweek07.backend.repository.CustomerRepository;
 import com.minh.labweek07.backend.repository.EmployeeRepository;
 import com.minh.labweek07.backend.repository.ProductPriceRepository;
 import com.minh.labweek07.backend.repository.ProductRepository;
+import com.minh.labweek07.backend.service.EmailService;
 import net.datafaker.Faker;
 import net.datafaker.providers.base.Address;
 import net.datafaker.providers.base.Device;
@@ -40,6 +41,7 @@ public class LabWeek07Application {
         config.put("api_secret",API_SECRET);
         return new Cloudinary(config);
     }
+
 
 
 }

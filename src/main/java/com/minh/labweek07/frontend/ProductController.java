@@ -74,6 +74,7 @@ public class ProductController {
         return json;
     }
 
+
     @GetMapping("/update-product")
     public String updateProduct(@RequestParam("id") long id, Model model) {
         Product product = productRepository.findById(id).get();

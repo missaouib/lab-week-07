@@ -1,10 +1,12 @@
 package com.minh.labweek07.frontend;
 
 import com.minh.labweek07.backend.enums.Color;
+import com.minh.labweek07.backend.models.Cart;
 import com.minh.labweek07.backend.models.Product;
 import com.minh.labweek07.backend.models.ProductCategory;
 import com.minh.labweek07.backend.repository.ProductCategoryRepository;
 import com.minh.labweek07.backend.repository.ProductRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,14 +26,48 @@ public class ShopController {
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
     @GetMapping("/shop")
-    public String shop(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size){
+    public String shop(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size, HttpSession session){
+        List<Cart> carts=(List<Cart>) session.getAttribute("cart");
+        if(carts==null){
+            carts=new ArrayList<Cart>();
+        }
+        model.addAttribute("sizeCart",carts==null?0:carts.size());
         int currentPage=page.orElse(1);
         int pageSize=size.orElse(6);
         List<ProductCategory> productCategories=productCategoryRepository.findAll();
         model.addAttribute("productCategories",productCategories);
         model.addAttribute("color", Color.values());
-
         Page<Product> productPage=productRepository.findAll(org.springframework.data.domain.PageRequest.of(currentPage-1,pageSize));
+        model.addAttribute("productPage",productPage);
+        int totalPages=productPage.getTotalPages();
+        if(totalPages>0){
+            int start=Math.max(1,currentPage-2);
+            int end=Math.min(currentPage+2,totalPages);
+            if(totalPages>5){
+                if(end==totalPages){
+                    start=end-5;
+                }
+                else if(start==1){
+                    end=start+5;
+                }
+            }
+            model.addAttribute("start",start);
+            model.addAttribute("end",end);
+
+        }
+        return "user/shop";
+    }
+    @GetMapping("/shop/search")
+    public String searchProduct(@RequestParam("search") String search,Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size, HttpSession session){
+
+        List<Cart> carts=(List<Cart>) session.getAttribute("cart");
+        model.addAttribute("sizeCart",carts==null?0:carts.size());
+        int currentPage=page.orElse(1);
+        int pageSize=size.orElse(6);
+        List<ProductCategory> productCategories=productCategoryRepository.findAll();
+        model.addAttribute("productCategories",productCategories);
+        model.addAttribute("color", Color.values());
+        Page<Product> productPage=productRepository.findProductsByNameContainingIgnoreCase(org.springframework.data.domain.PageRequest.of(currentPage-1,pageSize),search);
         model.addAttribute("productPage",productPage);
         int totalPages=productPage.getTotalPages();
         if(totalPages>0){
@@ -77,6 +114,7 @@ public class ShopController {
                     end=start+5;
                 }
             }
+            model.addAttribute("categorySelected",id);
             model.addAttribute("start",start);
             model.addAttribute("end",end);
 

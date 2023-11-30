@@ -22,4 +22,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(nativeQuery = true, value = "SELECT p.* FROM products p INNER JOIN product_detail pd ON p.product_id = pd.product_id WHERE pd.color = :id GROUP BY p.product_id")
     Page<Product> findProductsByColorId(@Param("id") int id, Pageable pageable);
+
+    Page<Product> findProductsByNameContainingIgnoreCase(PageRequest of, String name);
 }
