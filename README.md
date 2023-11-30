@@ -44,7 +44,8 @@
 -Nhấn nút giỏ hàng sẽ thêm vào giỏ hàng
 </p>
 <h1>Trang giỏ hàng</h1>
-<img width="940" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/8a621c9c-ce83-4502-a039-df6109722e9a">
+<img width="884" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/5e18184c-0c1f-4c19-bb20-52c8d953b989">
+
 
 
 <p>Chức năng <br/>
