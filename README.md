@@ -1,9 +1,11 @@
 # lab-week-07
+
  <h1>Các công nghệ sử dụng: Spring Data JPA,Spring MVC,Spring Boot 3,Spring Serurity 6,Spring Email,Thymleaf,MariaDB,Cloudiary</h1>
  <h1>Class Diagram</h1>
 <img width="369" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/610c5359-7f9d-4eff-a206-77c150555e0d">
 
-
+<h1>Video demo</h1>
+https://www.youtube.com/watch?v=18CtZBiOC9I
 <h1>Tổ chức thư mụcr</h1>
 <img width="203" alt="image" src="https://github.com/LPMinh/lab-week-07/assets/95513996/9ab4bd55-a32a-4c23-8ab5-0199326ade0d">
 
