@@ -7,11 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-public class Cart {
+public class Cart implements Serializable {
     private long id;
     private String name;
     private String image;

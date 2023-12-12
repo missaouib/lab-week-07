@@ -2,13 +2,14 @@ package com.minh.labweek07.backend.models;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "product_category")
-public class ProductCategory {
+public class ProductCategory implements Serializable {
     @Id
     private long id;
     @Column(name = "category_name")

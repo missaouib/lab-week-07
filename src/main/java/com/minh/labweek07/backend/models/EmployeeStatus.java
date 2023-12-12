@@ -1,6 +1,8 @@
 package com.minh.labweek07.backend.models;
 
-public enum EmployeeStatus {
+import java.io.Serializable;
+
+public enum EmployeeStatus implements Serializable {
     WORKING(1, "Đang làm việc"),
     ON_BREAK(0, "Tạm nghỉ"),
     RESIGNED(-1, "Nghỉ việc");

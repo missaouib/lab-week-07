@@ -31,7 +31,7 @@ public class SercurityConfig  {
     @Bean
     SecurityFilterChain sercurityFilterChain(HttpSecurity httpSecurity) throws Exception{
         return httpSecurity.authorizeHttpRequests(req->req.requestMatchers("/admin/**").hasAnyAuthority("admin").requestMatchers("/check-out/**").hasAnyAuthority("admin","user").anyRequest().permitAll()).formLogin(
-                form -> form.loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/admin/").successHandler((request, response, authentication)->{
+                form -> form.loginPage("/login").loginProcessingUrl("/login").successHandler((request, response, authentication)->{
                     UserDetails userDetails=(UserDetails) authentication.getPrincipal();
                     Logger logger=org.slf4j.LoggerFactory.getLogger(SercurityConfig.class);
                     logger.info("User logged in: "+userDetails.getUsername());
@@ -39,6 +39,7 @@ public class SercurityConfig  {
                     SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
                     if (savedRequest != null) {
                         String redirectUrl = savedRequest.getRedirectUrl();
+                        logger.info("redirectUrl = " + redirectUrl);
                         if (StringUtils.hasText(redirectUrl)) {
                             response.sendRedirect(redirectUrl);
                         } else {

@@ -3,13 +3,14 @@ package com.minh.labweek07.backend.models;
 import com.minh.labweek07.backend.pk.ProductPricePK;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
 @Table(name = "product_price")
 @NamedQuery(name = "ProductPrice.findByProductID", query = "SELECT p.price FROM ProductPrice p WHERE p.product.productId = :productID ORDER BY p.priceDate DESC")
 @IdClass(ProductPricePK.class)
-public class ProductPrice {
+public class ProductPrice implements Serializable {
     @Id
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "productID")
